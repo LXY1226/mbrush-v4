@@ -3,7 +3,8 @@
 
 echo "MB: $0 $1"
 [ "$1" != "start" ] && exit
-devmem 0x10010384 32 0x3f # pull up wifi sdio
+# not for v4 hardware
+#devmem 0x10010384 32 0x3f # pull up wifi sdio
 
 cd /root
 echo "MB: enter /root"
@@ -61,19 +62,19 @@ psk="$(get_psk)"
 echo "MB: prepare wpa_tpl.conf"
 echo "$(cat mb_etc/wpa_tpl.conf)" | sed -e "s/_SSID_/$ssid/g" -e "s/_PSK_/$psk/g" -e "s/_FREQ_/$cgi_freq/g" > /tmp/wpa_temp.conf
 
-
-if [ -f mb_conf/wifi_cali ]; then
-    wifi_ch="$(cat mb_conf/wifi_cali)"
-    echo "MB: wifi enter cali mode, ch $wifi_ch"
-    rm -rf mb_conf/wifi_cali
-    sync
-    insmod mb_etc/bin/esp8089.ko config=ate_test=1
-    sleep 2.5
-    mb_etc/bin/eagle_test_ate ate wifiscwout 1 $wifi_ch 0 > /dev/null
-else
-    insmod mb_etc/bin/esp8089.ko
-    sleep 2.5
-fi
+# not for v4 hardware?
+#if [ -f mb_conf/wifi_cali ]; then
+#    wifi_ch="$(cat mb_conf/wifi_cali)"
+#    echo "MB: wifi enter cali mode, ch $wifi_ch"
+#    rm -rf mb_conf/wifi_cali
+#    sync
+#    insmod mb_etc/bin/esp8089.ko config=ate_test=1
+#    sleep 2.5
+#    mb_etc/bin/eagle_test_ate ate wifiscwout 1 $wifi_ch 0 > /dev/null
+#else
+#    insmod mb_etc/bin/esp8089.ko
+#    sleep 2.5
+#fi
 
 echo "MB: ifconfig up"
 ifconfig usb0 192.168.88.1 up

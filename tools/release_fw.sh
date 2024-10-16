@@ -52,8 +52,8 @@ sed -i "/_HASHLIST_/ r hashlist.txt" mbrush-fw/mb_ser/sw.js
 rm -f hashlist.txt
 
 echo "compressing files with gzip ..."
-gzip -r mbrush-fw/mb_ser/css mbrush-fw/mb_ser/js mbrush-fw/mb_ser/img
-gzip mbrush-fw/mb_ser/index.html mbrush-fw/mb_ser/sw.js
+gzip -9 -r mbrush-fw/mb_ser/css mbrush-fw/mb_ser/js mbrush-fw/mb_ser/img
+gzip -9 mbrush-fw/mb_ser/index.html mbrush-fw/mb_ser/sw.js
 
 echo "$brand" > mbrush-fw/mb_ser/brand
 
